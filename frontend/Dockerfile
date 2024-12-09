@@ -1,14 +1,17 @@
-# Dockerfile for frontend (serving HTML, CSS, JS)
+# Use Alpine Linux as base image
 FROM alpine:latest
 
 # Install Nginx to serve static files
 RUN apk --no-cache add nginx
 
 # Copy frontend files to the Nginx directory
-COPY ./ /usr/share/nginx/html/
+COPY frontend/ /usr/share/nginx/html/
 
-# Expose the port that Nginx will use
-EXPOSE 80
+# Copy a custom Nginx configuration
+COPY frontend/nginx.conf /etc/nginx/nginx.conf
 
-# Start Nginx server
+# Expose port 8081 for the frontend
+EXPOSE 8081
+
+# Start the Nginx server
 CMD ["nginx", "-g", "daemon off;"]

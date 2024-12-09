@@ -7,4 +7,12 @@ services:
       dockerfile: backend/Dockerfile
     ports:
       - "8080:8080"
-    mem_limit: 1g   # Limit the memory to 1 GB
+    mem_limit: 1g   # Limit backend memory to 1 GB
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "8081:8081"
+    mem_limit: 1g
